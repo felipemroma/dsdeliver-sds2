@@ -1,5 +1,7 @@
+
 import './styles.css'
 import { ReactComponent as MainImage } from './main.svg'
+import Footer from '../Footer'
 
 function Home() {
   return (
@@ -16,14 +18,13 @@ function Home() {
             <a href="orders" className="home-btn-order">
                 FAZER PEDIDO
             </a>
-
           </div>
           <div className="home-image">
             <MainImage />
           </div>
         </div>
       </div>
-
+      <Footer />
     </>
   )
 }

@@ -1,16 +1,36 @@
-import { useEffect, useState } from 'react'
-import Footer from '../Footer'
-import StepsHeader from './StepsHeader'
+
 import './styles.css'
+import StepsHeader from './StepsHeader'
+import ProductsList from './ProductsList'
+import { useEffect, useState } from 'react'
+import { OrderLocationData, Product } from './types'
+import { fetchProducts } from '../api'
+import OrderLocation from './OrderLocation'
+
+function Orders() {
+  const [products, setProducts] = useState<Product[]>([])
+  //const [selectedProducts, setSelectedProducts] = useState<Product[]>([])
+  const [orderLocation, setOrderLocation] = useState<OrderLocationData>()
+  
+  useEffect(() => {
+    fetchProducts()
+      .then(response => setProducts(response.data))
+      .catch(error => console.log(error))
+  }, [])
 
 
-function Orders(){
-    return (
+  return (
+    <>
+      <div className="orders-container">
+        <StepsHeader />
+        <ProductsList products={products}/>
+        <OrderLocation onChangeLocation={location => setOrderLocation(location)} 
+        />
 
-        <div className="orders-container">
-            <StepsHeader />
-        </div>
-    )
+      </div>
+      
+    </>
+  ) 
 }
 
-export default Orders;
+export default Orders
